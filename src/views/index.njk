@@ -1,0 +1,18 @@
+{% extends "layout.njk" %}
+
+{% block pageTitle %}Post Redirect Get Example<{% endblock %}
+
+{% block content %}
+
+  <p class="govuk-body">An example of the Post Redirect Get pattern.</p>
+
+<ul class="govuk-list govuk-list--bullet govuk-list--spaced">
+  <li>
+    <a class="govuk-link" href="/without-prg">Without Post Redirect Get</a>
+  </li>
+  <li>
+    <a class="govuk-link" href="/with-prg">With Post Redirect Get</a>
+  </li>
+</ul>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "layout.njk" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/"
+  }) }}
+{% endblock %}
+
+{% block pageTitle %}Check Your Answers<{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">Check your answers</h1>
+
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: {
+          text: "Where do you live?"
+        },
+        value: {
+          text: whereDoYouLive
+        },
+        actions: {
+          items: [
+            {
+              href: "/",
+              text: "Change",
+              visuallyHiddenText: "change"
+            }
+          ]
+        }
+      }
+    ]
+  }) }}
+
+{% endblock %}

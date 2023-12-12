@@ -1,0 +1,86 @@
+{% extends "layout.njk" %}
+
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% block pageTitle %}Where do you live?{% endblock %}
+
+{% set hasErrors = errors.length > 0 %}
+
+{% block content %}
+
+  {% if hasErrors %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [
+        {
+          text: "Select where do you live",
+          href: "#whereDoYouLive"
+        }
+      ]
+    }) }}
+  {% endif %}
+
+  <h1 class="govuk-heading-l">Post Redirect Get Example</h1>
+
+  <p class="govuk-body">We are quite nosy and want to know where abouts you are currently living.</p>
+
+  <p class="govuk-body">This content is rendered from: <span class="govuk-!-font-weight-bold">"{{ renderedFrom }}"</span></p>
+
+  <form method="post">
+    {{ govukRadios({
+      name: "whereDoYouLive",
+      fieldset: {
+        legend: {
+          text: "Where do you live?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      items: [
+        {
+          value: "england",
+          text: "England"
+        },
+        {
+          value: "scotland",
+          text: "Scotland"
+        },
+        {
+          value: "wales",
+          text: "Wales"
+        },
+        {
+          value: "northern-ireland",
+          text: "Northern Ireland"
+        }
+      ],
+      errorMessage: hasErrors and {
+        text: "Select where do you live"
+      }
+    }) }}
+
+    {{ govukInput({
+      id: "form-submission-count",
+      name: "formSubmissionCount",
+      value: formSubmissionCounter | string,
+      disabled: true,
+      label: {
+        text: "How many times has this form been submitted?",
+        classes: "govuk-label--m",
+        isPageHeading: true
+      },
+      suffix: {
+        text: "submissions"
+      },
+      classes: "govuk-input--width-5",
+      spellcheck: false
+    }) }}
+
+    {{ govukButton({
+      text: "Save and continue"
+    }) }}
+  </form>
+{% endblock %}
